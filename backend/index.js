@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/auth", authRoute);
 app.use("/api/articles", articleRouter);
+
 app.use("/api", router);
 
 

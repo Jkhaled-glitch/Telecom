@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp.jsx";
 import SignIn from "./components/SignIn.jsx";
 // import Component from './components/myComponent.js'
 import Attachement from "./components/Attachement.jsx";
+import Attachements from "./components/Attachements.jsx";
 import OrdreService from "./components/OrdreDeService.jsx";
 import PvReceptionProvisoire from "./components/PVReception.jsx";
 import ChoosePage from "./components/ChoosePage.jsx";
@@ -14,16 +15,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter>                                                                                   
       <Routes>
         <Route path="/" element={<ChoosePage />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/NouveauMarché" element={<NouveauMarché />} />
         <Route path="/Attachement" element={<Attachement />} />
+        <Route path="/Attachements" element={<Attachements />} />
         <Route path="/OrdreService" element={<OrdreService />} />
         <Route path="/PVReception" element={<PvReceptionProvisoire />} />
         <Route path="/Articles" element={<Articles />} />
+
       </Routes>
       <ToastContainer />
     </BrowserRouter>

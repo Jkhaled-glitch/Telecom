@@ -6,6 +6,7 @@ import axios from "axios";
 const UpdateArticle = (name) => {
   console.log(name.name);
   const [rows, setRows] = useState([]);
+  const [myRows, setMyRows] = useState([]);
 
   const [articleInput, setArticleInput] = useState("");
   const [uniteInput, setUniteInput] = useState("");
@@ -48,19 +49,21 @@ const UpdateArticle = (name) => {
   };
 
   const deleteRow = (rowIndex) => {
+    /*
     const shouldDelete = window.confirm(
       "Are you sure you want to delete this row?"
     );
-    if (shouldDelete) {
-      const rowToDelete = rows[rowIndex];
+    */
+    //if (shouldDelete) {
+      const rowToDelete = myRows[rowIndex];
       const articleToDelete = rowToDelete.name;
 
-      const updatedRows = [...rows];
+      const updatedRows = [...myRows];
       updatedRows.splice(rowIndex, 1);
-      setRows(updatedRows);
+      setMyRows(updatedRows);
       console.log(articleToDelete);
-      axios
-        .delete(
+      /*
+      axios .delete(
           `http://localhost:4000/api/articles/delete/${articleToDelete}`
         )
         .then(() => {
@@ -69,7 +72,9 @@ const UpdateArticle = (name) => {
         .catch((error) => {
           console.error("Delete failed", error);
         });
-    }
+        */
+        
+    //}
   };
 
  
@@ -98,19 +103,10 @@ const UpdateArticle = (name) => {
   
  const handleSelectChange = (rowIndex) => {
   setSelectedDesignation(rowIndex);
+  const existingRow = myRows.find((row) => row === rows[rowIndex]);
 
-  if (rowIndex >= 0) {
-    const { name, unit, quantity, observations } = rows[rowIndex];
-
-    setArticleInput(name || "");
-    setUniteInput(unit || "");
-    setQuantiteInput(quantity || "");
-    setObservationsInput(observations || "");
-  } else {
-    setArticleInput("");
-    setUniteInput("");
-    setQuantiteInput("");
-    setObservationsInput("");
+  if (rowIndex >= 0 && !existingRow) {
+    setMyRows([...myRows,rows[rowIndex]])
   }
 };
 
@@ -131,18 +127,30 @@ const UpdateArticle = (name) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {myRows.map((row, index) => (
             <tr key={index}>
               <td>{row.name}</td>
               <td>{row.Designation}</td>
-              <td>{row.unit}</td>
-              <td>{row.quantity}</td>
 
-              <td>{row.observations}</td>
+              <td>
+                {row.unit}
+                </td>
+              <td>
+              <input 
+                value={quantiteInput}
+                onChange={(e)=>setQuantiteInput(e.target.value)}
+                />
+              </td>
+
+              <td>
+              <input 
+                value={observationsInput}
+                onChange={(e)=>setObservationsInput(e.target.value)}
+                /></td>
               <td>
                 <button
                   className={stylesArt["delete-row-btn"]}
-                  onClick={() => deleteRow(index)}
+                  onClick={() => deleteRow(index) }
                 >
                   Delete
                 </button>
@@ -151,17 +159,8 @@ const UpdateArticle = (name) => {
           ))}
           <tr>
 
-            <td>
-              {selectedDesignation >-1 && (
-                <input
-                  type="text"
-                  value={articleInput}
-                  onChange={(e) => handleInputChange(e, setArticleInput)}
-                  required
-                />
-              )}
-            </td>
-            <td>
+          <td></td>
+            <td >
               <div>
                 <div className={stylesArt["select-container"]}>
                   <select
@@ -179,41 +178,14 @@ const UpdateArticle = (name) => {
                 </div>
               </div>
             </td>
-            <td>
-              {(selectedDesignation >-1) && (
-                <input
-                  type="text"
-                  value={uniteInput}
-                  onChange={(e) => handleInputChange(e, setUniteInput)}
-                  required
-                />
-              )}
-            </td>
-            <td>
-            {selectedDesignation>-1 && (
-              <input
-                type="text"
-                value={quantiteInput}
-                onChange={(e) => handleInputChange(e, setQuantiteInput)}
-                required
-              />
-              )}
-            </td>
-            <td>
-            {selectedDesignation >-1 && (
-              <input
-                type="text"
-                value={observationsInput}
-                onChange={(e) => handleInputChange(e, setObservationsInput)}
-                required
-              />
-              )}
-            </td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
       <button className={stylesArt["add-row-btn"]} onClick={updateRow}>
-        Update Row
+        add Row
       </button>
     </div>
   );

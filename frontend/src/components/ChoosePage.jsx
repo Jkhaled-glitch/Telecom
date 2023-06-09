@@ -22,6 +22,7 @@ function App() {
               créer un nouveau marché
             </p>
             <Link to="/NouveauMarché">Explore</Link>
+           
           </div>
 
           <div className={styleAcc.box}>
@@ -33,7 +34,11 @@ function App() {
               Ici vous allez avoir le droit de créer un attachement avec l'ordre
               de service et extraire le PV de reception
             </p>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
             <Link to="/Attachement">Explore</Link>
+            <Link to="/Attachements">Attachements</Link>
+            </div>
           </div>
 
           <div className={styleAcc.box}>

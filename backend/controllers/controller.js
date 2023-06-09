@@ -2,12 +2,20 @@ import Responsable from "../models/responsable.js";
 import Market from "../models/market.js";
 import Materiel from "../models/Materiel.js";
 
+import Attachement from "../models/Attachement.js";
+
+import Service from "../models/Service.js";
+
+
 // add market
 const addMarket = async (req, res) => {
   try {
+
     console.log(req.body);
     const newMarket = await new Market(req.body).save();
+
     res.status(201).send(newMarket);
+
   } catch (error) {
     console.log(error);
 
@@ -20,6 +28,28 @@ const addResponsable = async (req, res) => {
   try {
     const newResponsable = await new Responsable(req.body).save();
     res.status(201).send(newResponsable);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({ message: error.message });
+  }
+};
+
+// add attachement
+const addAttachement = async (req, res) => {
+  try {
+    const newAttachement = await new Attachement(req.body).save();
+    res.status(201).send(newAttachement);
+  } catch (error) {
+    console.log(error);
+    res.status(409).json({ message: error.message });
+  }
+};
+
+// add service
+const addService = async (req, res) => {
+  try {
+    const newService = await new Service(req.body).save();
+    res.status(201).send(newService);
   } catch (error) {
     console.log(error);
     res.status(409).json({ message: error.message });
@@ -56,6 +86,11 @@ const deleteMaterielByNature = async (req, res) => {
 const deleteMaterielByID = async (req, res) => {
   try {
     console.log(req.params.id);
+
+    const materielExist = await Materiel.findOne({
+      _id : req.params.id,
+    });
+
     const materiel = await Materiel.findOneAndDelete({
       _id : req.params.id,
     });
@@ -132,6 +167,8 @@ const updateMaterialByID = async (req, res) => {
 export {
   addMarket,
   addResponsable,
+  addAttachement,
+  addService,
   addMateriel,
   deleteMaterielByNature,
   getMaterielByDesignation,
