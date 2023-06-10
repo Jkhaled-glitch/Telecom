@@ -140,6 +140,24 @@ const getMateriels = async (req, res) => {
     console.log(error);
   }
 };
+// getAttachements
+const getAttachements = async (req, res) => {
+  try {
+    const attachements = await Attachement.find();
+    res.status(200).send(attachements);
+  } catch (error) {
+    console.log(error);
+  }
+};
+// getServices
+const getServices = async (req, res) => {
+  try {
+    const services = await Service.find();
+    res.status(200).send(services);
+  } catch (error) {
+    console.log(error);
+  }
+};
 // update material by id
 const updateMaterialByID = async (req, res) => {
   try {
@@ -176,4 +194,6 @@ export {
   getMaterielByTitle,
   getMateriels,
   updateMaterialByID,
+  getAttachements,
+  getServices
 };

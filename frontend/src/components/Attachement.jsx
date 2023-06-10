@@ -134,7 +134,8 @@ const Attachement = () => {
       entreprise: attachementData.entreprise,
       operation: attachementData.operation,
       date: Date.now(),
-    });
+    }
+    );
   
     await axios.post("http://localhost:4000/api/addService", {
       ref_market: serviceData.ref_market,
@@ -209,7 +210,7 @@ const Attachement = () => {
 
                     <div className={stylesAtt["form-group"]}>
                       <label htmlFor="nomEntreprise">
-                        Nom de l'entreprise :
+                        Nom de l&apos;entreprise :
                       </label>
                       <input
                         type="text"
@@ -223,7 +224,7 @@ const Attachement = () => {
                     </div>
 
                     <div className={stylesAtt["form-group"]}>
-                      <label htmlFor="address">Intitulé de l'opération :</label>
+                      <label htmlFor="address">Intitulé de l&apos;opération :</label>
                       <input
                         type="text"
                         id="address"
@@ -276,7 +277,7 @@ const Attachement = () => {
 
       {/* start prestation GC */}
       <div className={stylesAtt.prestation}>
-        <h2 className={stylesAtt.title}>Prestations dues à l'entreprise</h2>
+        <h2 className={stylesAtt.title}>Prestations dues à l&apos;entreprise</h2>
         <div>
           <h4>Travaux & préstations exécutés</h4>
           <UpdateArticle name="Travaux génie civil" />
@@ -294,16 +295,16 @@ const Attachement = () => {
 
       {/* start matériel fournit par l'entreprise */}
       <div>
-        <h4>Matériel fournit par l'entreprise</h4>
+        <h4>Matériel fournit par l&apos;entreprise</h4>
         <UpdateMateriel name="entreprise"/>
       </div>
       {/* end matériel fournit par l'entreprise */}
 
       {/* start matériel fournit par l'administration */}
       <div>
-        <h4>matériel fournit par l'administration</h4>
+        <h4>matériel fournit par l&apos;administration</h4>
 
-        <UpdateMateriel name="administration"
+        <UpdateMateriel name="administration"   
         //  name="Matériel fournit par l'administration"
         />
       </div>
@@ -317,7 +318,7 @@ const Attachement = () => {
               <tr>
                 <th>Le Surveillant</th>
                 <th>Le chef de cellule</th>
-                <th>l'entrepreneur</th>
+                <th>l&apos;entrepreneur</th>
                 <th>Le chef de Service</th>
               </tr>
             </thead>

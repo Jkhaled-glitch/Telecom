@@ -6,8 +6,8 @@ import axios from "axios";
 const UpdateMateriel = (name) => {
   console.log(name.name);
   const [rows, setRows] = useState([]);
+  const [myRows, setMyRows] = useState([]);
 
- 
   const [uniteInput, setUniteInput] = useState("");
   const [natureInput, setNatureInput] = useState("");
   const [priceInput, setPriceInput] = useState("");
@@ -34,7 +34,7 @@ const UpdateMateriel = (name) => {
       await axios.put(
         
         `http://localhost:4000/api/updateMaterialByID/${id}`, newRow)
-        .then((res)=> fetchRows())
+        .then(()=> fetchRows())
       
     } else {
       alert("Veuillez remplir tous les champs");
@@ -45,18 +45,14 @@ const UpdateMateriel = (name) => {
     setInput(e.target.value);
   };
 
-  const deleteRow = (id) => {
-    const shouldDelete = window.confirm(
-      "Are you sure you want to delete this row?"
-    );
-    if (shouldDelete) {
+  const deleteRow = (/*rowIndex */) => {
+    
       
 
       const updatedRows = [...rows];
       updatedRows.splice(selectedDesignation, 1);
       setRows(updatedRows);
-
-      console.log(id);
+      /*
       axios
         .delete(
           `http://localhost:4000/api/deleteMaterielByID/${id}`
@@ -67,7 +63,8 @@ const UpdateMateriel = (name) => {
         .catch((error) => {
           console.error("Delete failed", error);
         });
-    }
+        */
+    
   };
 
  
@@ -97,19 +94,10 @@ const UpdateMateriel = (name) => {
   
  const handleSelectChange = (rowIndex) => {
   setSelectedDesignation(rowIndex);
+  const existingRow = myRows.find((row) => row === rows[rowIndex]);
 
-  if (rowIndex >= 0) {
-    const { nature, unit, price } = rows[rowIndex];
-
-    setNatureInput(nature || "");
-    setUniteInput(unit || "");
-    setPriceInput(price || "");
-
-  
-  } else {
-    setNatureInput("");
-    setUniteInput("");
-    setPriceInput("");
+  if (rowIndex >= 0 && !existingRow) {
+    setMyRows([...myRows,rows[rowIndex]])
   }
 };
 
@@ -130,7 +118,7 @@ const UpdateMateriel = (name) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {myRows.map((row, index) => (
             <tr key={index}>
               <td>{row.nature}</td>
               <td>{row.Designation}</td>

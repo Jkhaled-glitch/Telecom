@@ -65,7 +65,7 @@ function OrderService() {
                 <table>
                     <tbody>
                         <tr>
-                            <th>Zone D'action</th>
+                            <th>Zone D&apos;action</th>
                         </tr>
                         <tr>
                             <td><input type="text" /></td>
@@ -80,7 +80,7 @@ function OrderService() {
                         <tr>
                             <th>Date de début des travaux</th>
                             <td><input type="text" /></td>
-                            <th>Délai d'exécution</th>
+                            <th>Délai d&apos;exécution</th>
                             <td><input type="text" /></td>
                         </tr>
                     </tbody>
@@ -121,7 +121,7 @@ function OrderService() {
 
             <div className={stylesOS.buttons}>
                 <Link to="/PVReception">
-                    <button className={stylesOS.imprimer}>Valider</button>
+                    <button className={stylesOS.imprimer}  >Valider</button>
                 </Link>
                 <button className={stylesOS.imprimer} onClick={()=>window.print()} >Imprimer</button>
             </div>

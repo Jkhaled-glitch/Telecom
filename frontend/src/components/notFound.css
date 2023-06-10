@@ -1,0 +1,18 @@
+.notFound{
+   height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.notFound span{
+    text-decoration:underline;
+    color:blue;
+    cursor: pointer;
+    transition: all  .4s;
+}
+.notFound span:hover{
+    font-weight: bold;
+ 
+}
+  

@@ -7,6 +7,7 @@ const UpdateArticle = (name) => {
   console.log(name.name);
   const [rows, setRows] = useState([]);
   const [myRows, setMyRows] = useState([]);
+  const [inputs,setInputs] = useState([]);
 
   const [articleInput, setArticleInput] = useState("");
   const [uniteInput, setUniteInput] = useState("");
@@ -61,6 +62,11 @@ const UpdateArticle = (name) => {
       const updatedRows = [...myRows];
       updatedRows.splice(rowIndex, 1);
       setMyRows(updatedRows);
+
+      const updatedInputs = [...inputs];
+      updatedInputs.splice(rowIndex, 1);
+      setInputs(updatedInputs);
+
       console.log(articleToDelete);
       /*
       axios .delete(
@@ -107,6 +113,10 @@ const UpdateArticle = (name) => {
 
   if (rowIndex >= 0 && !existingRow) {
     setMyRows([...myRows,rows[rowIndex]])
+    setInputs([...inputs,{
+      quantity:'',
+      observastions:''
+    }])
   }
 };
 
@@ -127,36 +137,42 @@ const UpdateArticle = (name) => {
           </tr>
         </thead>
         <tbody>
-          {myRows.map((row, index) => (
-            <tr key={index}>
-              <td>{row.name}</td>
-              <td>{row.Designation}</td>
+        {myRows.map((row, index) => (
+  <tr key={index}>
+    <td>{row.name}</td>
+    <td>{row.Designation}</td>
+    <td>{row.unit}</td>
+    <td>
+      <input
+        value={inputs[index].quantity}
+        onChange={(e) => {
+          const updatedInputs = [...inputs];
+          updatedInputs[index].quantity = e.target.value;
+          setInputs(updatedInputs);
+        }}
+      />
+    </td>
+    <td>
+      <input
+        value={inputs[index].observastions}
+        onChange={(e) => {
+          const updatedInputs = [...inputs];
+          updatedInputs[index].observastions = e.target.value;
+          setInputs(updatedInputs);
+        }}
+      />
+    </td>
+    <td>
+      <button
+        className={stylesArt["delete-row-btn"]}
+        onClick={() => deleteRow(index)}
+      >
+        Delete
+      </button>
+    </td>
+  </tr>
+))}
 
-              <td>
-                {row.unit}
-                </td>
-              <td>
-              <input 
-                value={quantiteInput}
-                onChange={(e)=>setQuantiteInput(e.target.value)}
-                />
-              </td>
-
-              <td>
-              <input 
-                value={observationsInput}
-                onChange={(e)=>setObservationsInput(e.target.value)}
-                /></td>
-              <td>
-                <button
-                  className={stylesArt["delete-row-btn"]}
-                  onClick={() => deleteRow(index) }
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
           <tr>
 
           <td></td>

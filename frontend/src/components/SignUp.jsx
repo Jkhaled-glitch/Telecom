@@ -1,11 +1,13 @@
 import { useState } from "react";
 import styles from "../styles/SignUp.module.css"; // Import CSS module
-import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
 import form3 from "../assets/formsimg3.png";
+import { useNavigate } from "react-router-dom";
+
 
 export default function App() {
+  const navigate = useNavigate()
   const [res, setRes] = useState({
     email: "",
     username: "",
@@ -25,9 +27,10 @@ export default function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (res.email === "" || res.password === "" || res.confirmPassword === "") {
+    if (res.email === "" || res.username === "" || res.password === "" || res.confirmPassword === "") {
       setMessage("Please fill in all the fields");
     } else if (res.password === res.confirmPassword) {
+
       const user = {
         name: res.username,
         email: res.email,
@@ -35,13 +38,18 @@ export default function App() {
       };
       await axios
         .post(
-          "https://pfe-telecome-ilyes-b-h-d.vercel.app/api/auth/register",
+          "http://localhost:4000/api/auth/register",
           user
         )
         .then((response) => {
           console.log(response.data);
         });
       setMessage("Successfully signed up");
+      setTimeout(() => {
+        navigate("/SignIn")
+      }, 2000);
+     
+
     } else {
       setMessage("Passwords do not match");
     }
@@ -64,9 +72,8 @@ export default function App() {
 
   return (
     <>
-      <Header />
       <div>
-        <h2>Sign Up</h2>
+        <h2 style={{display:"flex",justifyContent:'center',marginTop:"30px"}}>Sign Up</h2>
         <div className={styles.container}>
           <div className={styles["image-container"]}>
             <img src={form3} alt="Imagee" />
@@ -106,6 +113,8 @@ export default function App() {
                 value={res.confirmPassword}
               />
               <button className={styles["form--submit"]}>Sign up</button>
+              or
+              <SignInLink />
             </form>
           </div>
         </div>
@@ -121,3 +130,40 @@ export default function App() {
     </>
   );
 }
+
+const SignInLink = () => {
+  const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleClick = () => {
+    navigate("/SignIn");
+  };
+
+  const linkStyles = {
+    cursor: isHovered ? "pointer" : "default",
+    color: isHovered ? "#1562a2" : "black",
+  };
+
+  return (
+    <u
+      style={linkStyles}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+    >
+      Sign In
+    </u>
+  );
+};
+
+
+
+

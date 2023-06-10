@@ -12,6 +12,8 @@ import {
   getMateriels,
   getMaterielByTitle,
   updateMaterialByID,
+  getAttachements,
+  getServices
 
 
 } from "../controllers/controller.js";
@@ -31,6 +33,8 @@ router.put("/updateMaterialByID/:id", updateMaterialByID);
 router.get("/getMaterielByTitle/:title", getMaterielByTitle);
 router.get("/getMaterielByDesignation/:designation", getMaterielByDesignation);
 router.get("/getMateriels", getMateriels);
+router.get("/getAttachements", getAttachements);
+router.get("/getServices", getServices);
 
 
 export default router;

@@ -10,4 +10,5 @@ connect(
   }
 ).then(() => {
   console.log("Database connected..");
-});
+})
+.catch((err)=>console.log("failed to connect to database"));
