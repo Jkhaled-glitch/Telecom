@@ -9,45 +9,12 @@ const UpdateArticle = (name) => {
   const [myRows, setMyRows] = useState([]);
   const [inputs,setInputs] = useState([]);
 
-  const [articleInput, setArticleInput] = useState("");
-  const [uniteInput, setUniteInput] = useState("");
-  const [quantiteInput, setQuantiteInput] = useState("");
-  const [observationsInput, setObservationsInput] = useState("");
 
   const [designationOptions, setDesignationOptions] = useState([]);
 
   const [selectedDesignation, setSelectedDesignation] = useState(-1);
 
-  const updateRow = async () => {
 
-    if (quantiteInput && observationsInput) {
-      const newRow = {
-        name: articleInput,
-        unit: uniteInput,
-        quantity: quantiteInput,
-        observations: observationsInput,
-      };
-
-      //setQuantiteInput(quantiteInput);
-      //setObservationsInput(observationsInput);
-      
-
-      setRows([...rows, newRow]);
-
-      //console.log("new article", newRow);
-      await axios.put(
-        `http://localhost:4000/api/articles/update/${articleInput}`,
-        newRow
-      ).then((res)=>fetchRows())
-      
-    } else {
-      alert("Veuillez remplir tous les champs");
-    }
-  };
-
-  const handleInputChange = (e, setInput) => {
-    setInput(e.target.value);
-  };
 
   const deleteRow = (rowIndex) => {
     /*
@@ -200,9 +167,7 @@ const UpdateArticle = (name) => {
           </tr>
         </tbody>
       </table>
-      <button className={stylesArt["add-row-btn"]} onClick={updateRow}>
-        add Row
-      </button>
+      
     </div>
   );
 };

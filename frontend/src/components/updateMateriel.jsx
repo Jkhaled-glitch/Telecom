@@ -16,30 +16,6 @@ const UpdateMateriel = (name) => {
 
   const [selectedDesignation, setSelectedDesignation] = useState(-1);
 
-  const updateRow = async (id) => {
-
-    if (uniteInput && natureInput && priceInput) {
-      const newRow = {
-        nature: natureInput,
-        unit: uniteInput,
-        price: priceInput,
-      };
-
-
-      
-
-      setRows([...rows, newRow]);
-
-
-      await axios.put(
-        
-        `http://localhost:4000/api/updateMaterialByID/${id}`, newRow)
-        .then(()=> fetchRows())
-      
-    } else {
-      alert("Veuillez remplir tous les champs");
-    }
-  };
 
   const handleInputChange = (e, setInput) => {
     setInput(e.target.value);
@@ -188,9 +164,7 @@ const UpdateMateriel = (name) => {
           </tr>
         </tbody>
       </table>
-      <button className={stylesArt["add-row-btn"]} onClick={()=>updateRow(  rows[selectedDesignation]._id )   }>
-        Update Row
-      </button>
+      
     </div>
   );
 };
